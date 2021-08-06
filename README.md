@@ -38,14 +38,14 @@ I created the project using RStudio on MacOS, but the process should be similar 
 
 ## geo_data.csv
 
-CITYNAME      - i.e. Hanoi
-COUNTRYNAME   - i.e. Vietnam
-COUNTRYCODE   - i.e. VT
-LAT           - Lattitude i.e. 21.0278
-LONG          - Longitude i.e. 105.8342
-ICONNAME      - i.e. fa-map-pin
-LATEXICONNAME - i.e. faMapPin
-DESC          - bullet-point summary descriptions, with each point separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end.
+- CITYNAME      - i.e. Hanoi
+- COUNTRYNAME   - i.e. Vietnam
+- COUNTRYCODE   - i.e. VT
+- LAT           - Lattitude i.e. 21.0278
+- LONG          - Longitude i.e. 105.8342
+- ICONNAME      - i.e. fa-map-pin
+- LATEXICONNAME - i.e. faMapPin
+- DESC          - bullet-point summary descriptions, with each point separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end.
 
 uses font awesome icons within both R and Latex.
 
@@ -56,27 +56,27 @@ R package: library(fontawesome)
 
 ## resume_data.csv
 
-CATEGORY      - EDUCATION, EXPERIENCE, EXTRACURRICULAR, SKILL, PUBLICATION
-TITLE         - "Chief Executive Officer" or "Master's Degree in Architecture"
-INSTITUTION   - "Black Mountain College" or "Geodesics Inc."
-STARTDATE     - DD/MM/YYYY
-ENDDATE       - DD/MM/YYYY
-CITYNAME      - NOTE: This should match with CITYNAMEs in geo_data.csv
-DESCRIPTION   - bullet-point summary descriptions, with each point separated by a semicolon i.e. "built huge geodesic domes; lectured in Raleigh in 1949". Note there is no semicolon at the end.
+- CATEGORY      - EDUCATION, EXPERIENCE, EXTRACURRICULAR, SKILL, PUBLICATION
+- TITLE         - "Chief Executive Officer" or "Master's Degree in Architecture"
+- INSTITUTION   - "Black Mountain College" or "Geodesics Inc."
+- STARTDATE     - DD/MM/YYYY
+- ENDDATE       - DD/MM/YYYY
+- CITYNAME      - NOTE: This should match with CITYNAMEs in geo_data.csv
+- DESCRIPTION   - bullet-point summary descriptions, with each point separated by a semicolon i.e. "built huge geodesic domes; lectured in Raleigh in 1949". Note there is no semicolon at the end.
 
 ## interests_data.csv
 
 The idea of the interests word-cloud is to display interests which move from generic one-word categories through to longer examples. To do this data is organised into 'categories', 'subcategories' and 'deepdives'. 'Categories' are shown in large text, each in a different colour. 'Subcategories' of interests appear in smaller text, in colours that correspond to the initial categories. 'Deepdives' do the same again but smaller still. Typically there are 4 'subcats' and 6 'deepdives' for each 'category'. An example for one category would be:
 
-CATS          - "Domes"
-SUBCATS       - "Geodesic;Monolithic;Crossed-arch;Rotational"
-DEEPDIVES     - "Dome Of The Rock, Jerusalem; Taj Mahal, Agra;Saint Basil’s Cathedral, Moscow;Seagaia Ocean Dome, Miyazaki; Round Valley Ensphere, Arizona; Jeddah Super Dome, Saudi Arabia"
+- CATS          - "Domes"
+- SUBCATS       - "Geodesic;Monolithic;Crossed-arch;Rotational"
+- DEEPDIVES     - "Dome Of The Rock, Jerusalem; Taj Mahal, Agra;Saint Basil’s Cathedral, Moscow;Seagaia Ocean Dome, Miyazaki; Round Valley Ensphere, Arizona; Jeddah Super Dome, Saudi Arabia"
 
 ## skills_data.csv
 
-name          -
-category      -
-size          -
+- name          -
+- category      -
+- size          -
 
 # Acknowledgements
 

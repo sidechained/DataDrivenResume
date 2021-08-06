@@ -1,3 +1,5 @@
+TODO: Add PDF example
+
 # Aim
 The basic aim of this project was to create a two-page resume with a geographical overview on the first page and selected highlights from my CV on the second, with layout/code separated from content as much as possible. The project also proved useful to learn Rmarkdown and deepen my knowledge of R and Latex.
 

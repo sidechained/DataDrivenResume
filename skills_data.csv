@@ -1,0 +1,12 @@
+name,category,size
+Windows,Operating System,1
+Linux,Operating System,2
+MacOS,Operating System,3
+Python,Programming Language,2
+Supercollider,Programming Language,3
+MaxMSP,Programming Language,2
+C++,Programming Language,1
+R,Programming Language,3
+git,Other,2
+Jenkins,Other,1
+Latex,Other,2

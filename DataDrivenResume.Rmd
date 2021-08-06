@@ -1,0 +1,380 @@
+---
+name: Buckminster
+surname: Fuller
+position: Architect >> Inventor >> Futurist
+address: |
+         | 407 S. Forest Ave., Carbondale, Illinois
+phone: +49 111 2222 3333
+email: "buckminster.fuller  @geodesic-mail.com"
+twitter: bucky1895
+github: bucky1895
+# reinclude other options here
+aboutme: "When I am working on a problem, I never think about beauty but when I have finished, if the solution is not beautiful, I know it is wrong. We are called to be architects of the future, not its victims. There is nothing in a caterpillar that tells you it's going to be a butterfly. Love is metaphysical gravity. Don't fight forces, use them. Integrity is the essence of everything successful. Everyone is born a genius, but the process of living de-geniuses them."
+# linkedin: bucky1895
+dateofbirth: 12/07/1895
+headcolor: 009ACD
+date: "`r format(Sys.time(), '%B %Y')`"
+docname: "Curriculum Vitae"
+#docname: "Lebenslauf"
+output: 
+  vitae::awesomecv:
+    keep_tex: true
+always_allow_html: yes
+header-includes:
+  \usepackage{float}
+  \usepackage{multicol}
+  \usepackage{colortbl}
+  \arrayrulecolor{white}
+  \usepackage{hhline}
+  \usepackage{fontawesome5}
+  \definecolor{light-gray}{gray}{0.95}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+# move these to relevant sections
+library(vitae)
+library(dplyr)
+library(tidyr)
+library(fontawesome)
+library(ggplot2)
+library(sf)
+library(rworldmap)
+library(stplanr)
+library(emojifont)
+library(wordcloud)
+library(tm)
+library(gridExtra)
+# Sys.setlocale("LC_TIME", "de_DE.UTF-8") # German language support (for months of dates) - comment out if generating English CV 
+```
+
+```{r}
+month_year_formatter <- function(date) {
+  # format date from date '01/01/2019' into string "Jan 2019"
+  # convert future dates into "Present Day" string
+  current_date <- Sys.Date()
+  ifelse(
+    date > current_date, 
+    "Present Day",
+#    "heute",
+    paste(format(date, "%b"), format(date, "%Y"))
+  )
+}
+```
+
+```{r}
+year_formatter <- function(date) {
+  # format date from date '01/01/2019' into string "2019"
+  # convert future dates into "Present Day" string
+  current_date <- Sys.Date()
+  ifelse(
+    date > current_date, 
+    "Present Day",
+#   "heute",
+    paste(format(date, "%Y"))
+  )
+}
+```
+
+```{r}
+
+```
+
+```{r}
+geo_data <- read.csv("geo_data.csv")
+cv_data <- read.csv("cv_data.csv") %>%
+  mutate(STARTDATE = as.Date(STARTDATE, format = "%d/%m/%Y")) %>%
+  mutate(ENDDATE = as.Date(ENDDATE, format = "%d/%m/%Y")) %>%
+  full_join(geo_data,by="CITYNAME") %>% # lookup CITYNAME in geo_data and merge as extra columns into cv_data (i.e. COUNTRYNAME, COUNTRYCODE, LAT, LONG)
+  arrange(desc(STARTDATE)) 
+#%>% slice(1:13)
+
+# extract date ranges for time spent in each city:
+geo_data <- geo_data %>%
+  full_join(cv_data %>% 
+              arrange(STARTDATE) %>%
+              group_by(CITYNAME) %>% 
+              summarise(STARTDATE = first(STARTDATE))
+  ) %>% 
+  full_join(cv_data %>%
+              arrange(desc(ENDDATE)) %>%
+              group_by(CITYNAME) %>%
+              summarise(ENDDATE = first(ENDDATE))
+  )
+# turn dates into month-year strings e.g. "Aug 2017"  
+cv_data <- cv_data %>% 
+  mutate(STARTDATE = month_year_formatter(STARTDATE)) %>% 
+  mutate(ENDDATE = month_year_formatter(ENDDATE))
+
+geo_data <- geo_data %>% 
+  mutate(STARTDATE = year_formatter(STARTDATE)) %>% 
+  mutate(ENDDATE = year_formatter(ENDDATE))
+```
+
+```{r}
+get_icontype <- function(data) {
+  data %>% mutate(ICONTYPE = case_when(
+    CATEGORY == "EDUCATION" ~ "\\faGraduationCap",
+    CATEGORY == "EXPERIENCE" ~ "\\faBriefcase",
+    CATEGORY == "EXTRACURRICULAR" ~ "\\faHandsHelping",
+    CATEGORY == "SKILL" ~ "\\faCogs",
+    CATEGORY == "PUBLICATION" ~ "\\faBookOpen"
+  )
+  )
+}
+```
+
+```{r}
+categories_to_german <- function(data) {
+ data %>% mutate(
+   CATEGORY = case_when(
+       CATEGORY == "EDUCATION" ~ "BILDUNG",
+       CATEGORY == "EXPERIENCE" ~ "ERFAHRUNG",
+       CATEGORY == "EXTRACURRICULAR" ~ "FREIZEITAKTIVITÄT",
+       CATEGORY == "SKILL" ~ "ERFAHRUNG", # normally "FERTIGKEITEN" but hacked this for short parental entry
+       CATEGORY == "PUBLICATION" ~ "VERÖFFENTLICHUNG"
+    )
+   ) 
+}
+```
+
+```{r}
+make_detailed_entry <- function(detailed_data) {
+  # remove 'categories_to_german' if generating English CV
+  detailed_data %>% get_icontype %>% 
+    # categories_to_german %>% 
+    transmute(
+      LATEXSTRING = paste0(
+        "\\cventry{",TITLE,"}{",ICONTYPE,"}{",LOCATION,"}{",INSTITUTION,"}{",CATEGORY,"}{",DATES,"}{",DESCRIPTION,"}"
+      )
+  ) %>% pull(LATEXSTRING)
+}
+```
+
+```{r}
+make_short_entry <- function(short_data) {
+  # remove 'categories_to_german' if generating English CV
+  short_data %>% get_icontype %>%
+    # categories_to_german %>%
+    transmute(
+      LATEXSTRING = paste0(
+        # same latex macro is called as for detailed entries but 'location' and 'institution' are left blank
+        "\\cventry{",TITLE,"}{",ICONTYPE,"}","{}","{}","{",CATEGORY,"}{",DATES,"}{",DESCRIPTION,"}"
+      )
+  ) %>% pull(LATEXSTRING)
+}
+```
+
+```{r}
+extract_detailed_data <- function (data) {
+  data %>% mutate(ENDDATE = if_else(
+    is.na(ENDDATE),
+    "", # if enddate does not exist, make it ""
+    paste0(" - ", ENDDATE) # if enddate exists, make it " - " + ENDDATE
+  )
+  ) %>%
+    unite(LOCATION, CITYNAME, COUNTRYCODE, sep = ", ") %>%
+    unite(DATES, STARTDATE, ENDDATE, sep = "") %>%
+    select(CATEGORY, TITLE, INSTITUTION, LOCATION, DATES, DESCRIPTION)
+}
+```
+
+```{r}
+extract_short_data <- function(data) {
+  data %>% mutate(ENDDATE = if_else(
+    is.na(ENDDATE),
+    "", # if enddate does not exist, make it ""
+    paste0(" - ", ENDDATE) # if enddate exists, make it " - " + ENDDATE
+  )
+  ) %>%
+    unite(DATES, STARTDATE, ENDDATE, sep = "") %>%
+    select(CATEGORY, TITLE, DATES, DESCRIPTION)
+}
+```
+
+```{r}
+get_long_lat <- function(city) {
+  # TODO: change to lookup in cv_data instead
+  geo_data %>% filter(CITYNAME == city) %>% select(LONG, LAT) %>% as.numeric()
+}
+```
+\faIcon{plane} My journey
+==========================
+
+```{r edu_plot,fig.align='center', fig.width=6.5, fig.height=2.7, fig.showtext=TRUE}
+# WORLD MAP:
+load.fontawesome()
+
+world <- getMap(resolution = "high")
+world <- world %>% st_as_sf()
+cities <- st_sfc(
+  # CHALLENGE: do this programatically by just getting column sorted by date:
+  st_point(get_long_lat('Leicester')),
+  st_point(get_long_lat('Edinburgh')),
+  st_point(get_long_lat('Hanoi')),
+  st_point(get_long_lat('Brno'))
+) %>%
+  st_sf(name = geo_data %>% unite(CITY_COUNTRYCODE, CITYNAME, COUNTRYCODE, sep = ", ") %>% pull(CITY_COUNTRYCODE)) %>%
+  st_set_crs(4326) %>%
+  # appopriate icons: thumbtack suitcase dolly dolly-flatbed box-open ticket-alt plane-arrival plane-departure map-marker map map-marker-alt map-pin truck-moving truck-loading
+  mutate(label = fontawesome(geo_data %>% pull(ICONNAME)))
+routes <- cities %>%
+  points2line() %>%
+  slice(c(2,7,12)) %>%
+  st_segmentize(units::set_units(100, m))
+
+ggplot(data = world) +
+  geom_sf(color = 'white', lwd = 0.1) +
+  xlab("") + ylab("") +
+  geom_sf_text(
+    data = cities,
+    aes(label = label),
+    size = 3,
+    color = '#009ACD',
+    family = "fontawesome-webfont"
+  ) +
+  geom_sf(
+    data = routes, color = '#009ACD', size = 0.5, alpha = 0.5, linetype = 'dotted'
+  ) +
+  coord_sf(crs = '+proj=robin', xlim = c(-300000, 10500000), ylim = c(2300000,6600000)) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_line(color = 'transparent'),
+    plot.margin = margin(-1, 0, -1, 0, "cm"),
+    axis.text = element_blank(),
+    axis.title = element_blank()
+  )
+```
+
+```{r}
+make_geo_entry <- function(data) {
+  data %>% 
+    unite(CITYCOUNTRY, CITYNAME, COUNTRYCODE, sep = ", ") %>% # unite city name and country
+    unite(DATERANGE, STARTDATE, ENDDATE, sep = " - ") %>% # unite start and enddates to form date range 
+    transmute(
+      LATEXSTRING = paste0(
+        "\\geoentry{\\",LATEXICONNAME,"}{",CITYCOUNTRY,"}{",DATERANGE,"}{",DESC,"}"
+      )
+    ) %>% pull(LATEXSTRING)
+}
+```
+
+```{r}
+geo_data <- geo_data %>% mutate(LATEX = geo_data %>% make_geo_entry)
+knitr::raw_latex(
+  paste0(
+    "\\begin{geoentries}\n\n",
+    paste0(
+      "\\georow{",
+      geo_data %>% filter(CITYNAME == 'Leicester') %>% pull(LATEX), "}", "{",
+      geo_data %>% filter(CITYNAME == 'Edinburgh') %>% pull(LATEX), "}\n\n"
+    ),
+    paste0(
+      "\\georow{",
+      geo_data %>% filter(CITYNAME == 'Hanoi') %>% pull(LATEX), "}", "{",
+      geo_data %>% filter(CITYNAME == 'Brno') %>% pull(LATEX), "}\n\n"
+    ),
+    "\\end{geoentries}\n\n"
+  )
+)
+```
+
+```{r}
+knitr::raw_latex(
+  paste0(
+    "\\begin{geoentries}\n\n",
+    "\\georow{",
+    "\\hypertarget{interests}{\\section{\\texorpdfstring{\\faIcon{cog} Interests}{ Interests}}\\label{interests}}",
+    "}{",
+    "\\hypertarget{skills}{\\section{\\texorpdfstring{\\faIcon{brain} Skills}{ Skills}}\\label{skills}}",
+    "}\n\n",
+    "\\end{geoentries}\n\n",
+    "\\vspace{-0.5cm}\n\n"
+  )
+)
+```
+
+```{r, fig.width = 15, fig.height = 2.6, fig.align='center', echo=FALSE}
+# CIRCLE PACKING
+
+# libraries
+library(packcircles)
+library(ggplot2)
+library(viridis)
+library(dplyr)
+
+skills_data <- read.csv("skills_data.csv")
+skill_names <- skills_data %>% pull(name)
+skill_categories <- skills_data %>% pull(category) %>% as.factor
+skill_sizes <- skills_data %>% pull(size) %>% as.numeric
+skill_colours <- as.integer(skill_categories)
+
+# increase size of small bubble
+skill_sizes <- sapply(skill_sizes, function(x) { if (x == 1)  {1.3} else {x} } )
+
+data1 <- data.frame(group=skill_names,value=skill_sizes,colour=skill_colours)
+
+# Generate the layout
+packing <- circleProgressiveLayout(data1$value, sizetype='area')
+packing$radius <- 0.95*packing$radius
+data1 <- cbind(data1, packing)
+dat1.gg <- circleLayoutVertices(packing, npoints=50)
+
+# and colour to dat1.gg based on id
+dat1.gg <- dat1.gg %>% mutate(colour = skill_colours[id])
+dat1.gg <- dat1.gg %>% mutate(colour = colour)
+
+# WORDCLOUD
+
+library(wordcloud)
+library(tm)
+library(gridGraphics)
+library(gridExtra)
+library(cowplot)
+
+interests_data <- read.csv("interests_data.csv") %>% mutate(subcats = strsplit(subcats, ";")) %>% mutate(deepdives = strsplit(deepdives, ";")) %>% mutate(cats = as.factor(cats))
+catcols <- c("firebrick2", "blue4", "darkgreen", "darkorange3", "cornflowerblue")
+allcols <- c(catcols, subcatcols, deepdivecols)
+i2 <- interests_data %>% mutate(subcat_colours = )
+
+words = c(interests_data$cats, interests_data$subcats, interests_data$deepdives)
+words
+
+freqs = c(
+  seq(from = 5, to = 5, length.out = length(cats)),
+  seq(from = 2, to = 2, length.out = length(subcats)),
+  seq(from = 1, to = 1, length.out = length(deepdives))
+)
+
+par(mfrow=c(1,2), mar=c(0, 5, 0, 0))
+
+set.seed(22)
+wordcloud(words, freqs, min.freq=1, random.order = FALSE, max.words = Inf, scale=c(1.5,0.2), colors = allcols, ordered.colors = TRUE, rot.per=.15)
+
+plot2 <- ggplot() +
+  geom_polygon(data = dat1.gg, aes(x, y, group = id, fill = colour), colour = "black", alpha = 0.6) +
+  scale_fill_viridis() +
+  geom_text(data = data1, aes(x, y, size=1, label = group), color="black") +
+  scale_size_continuous(range = c(3,3)) +
+  theme_void() +
+  theme(legend.position="none") +
+  coord_equal()
+
+grid.draw(as_grob(plot2))
+```
+
+\newpage
+
+\faIcon{user-clock} Selected Timeline
+============================
+
+```{r}
+# call functions to return latex
+case_data <- cv_data %>%
+  mutate(LATEX = case_when( # simplify with ORs
+    CATEGORY == "EDUCATION" | CATEGORY == "EXPERIENCE" | CATEGORY == "PUBLICATION" ~ cv_data %>% extract_detailed_data %>% make_detailed_entry,
+    CATEGORY == "EXTRACURRICULAR" | CATEGORY == "SKILL" ~ cv_data %>% extract_short_data %>% make_short_entry
+  ))
+cventries <- paste0(case_data %>% pull(LATEX), "\n\n", collapse = '')
+knitr::raw_latex(paste0("\\begin{cventries}\n\n", cventries, "\\end{cventries}\n"))
+```

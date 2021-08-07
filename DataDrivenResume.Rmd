@@ -2,23 +2,24 @@
 name: Buckminster
 surname: Fuller
 position: Architect >> Inventor >> Futurist
-address: |
-         | 407 S. Forest Ave., Carbondale, Illinois
+address: 407 S. Forest Ave., Carbondale, Illinois
+#profilepic: bucky.jpg
+dateofbirth: 12/07/1895
 phone: +49 111 2222 3333
 email: "buckminster.fuller@geodesic-mail.com"
+homepage: "www.bucky1985.com"
 twitter: bucky1895
 github: bucky1895
-# reinclude other options here
-aboutme: "When I am working on a problem, I never think about beauty but when I have finished, if the solution is not beautiful, I know it is wrong. We are called to be architects of the future, not its victims. There is nothing in a caterpillar that tells you it's going to be a butterfly. Love is metaphysical gravity. Don't fight forces, use them. Integrity is the essence of everything successful. Everyone is born a genius, but the process of living de-geniuses them."
-# linkedin: bucky1895
-dateofbirth: 12/07/1895
+linkedin: bucky1895
+researchgate: bucky1895
+orcid: 0000-0000-0000-0000
+aboutme: "When I am working on a problem, I never think about beauty but when I have finished, if the solution is not beautiful, I know it is wrong. We are called to be architects of the future, not its victims. There is nothing in a caterpillar that tells you it's going to be a butterfly. Love is metaphysical gravity. Don't fight forces, use them. Integrity is the essence of everything successful. Everyone is born a genius, but the process of living de-geniuses them. Humanity is acquiring all the right technology for all the wrong reasons."
 headcolor: 009ACD
 date: "`r format(Sys.time(), '%B %Y')`"
 docname: "Resume"
-#docname: "Lebenslauf"
 output: 
   vitae::awesomecv:
-    keep_tex: true
+    keep_tex: false
 always_allow_html: yes
 header-includes:
   \usepackage{float}
@@ -32,19 +33,10 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-# move these to relevant sections
 library(vitae)
 library(dplyr)
 library(tidyr)
-library(fontawesome)
 library(ggplot2)
-library(sf)
-library(rworldmap)
-library(stplanr)
-library(emojifont)
-library(wordcloud)
-library(tm)
-library(gridExtra)
 # Sys.setlocale("LC_TIME", "de_DE.UTF-8") # German language support (for months of dates) - comment out if generating English CV 
 ```
 
@@ -77,17 +69,12 @@ year_formatter <- function(date) {
 ```
 
 ```{r}
-
-```
-
-```{r}
 geo_data <- read.csv("geo_data.csv")
 cv_data <- read.csv("cv_data.csv") %>%
   mutate(STARTDATE = as.Date(STARTDATE, format = "%d/%m/%Y")) %>%
   mutate(ENDDATE = as.Date(ENDDATE, format = "%d/%m/%Y")) %>%
   full_join(geo_data,by="CITYNAME") %>% # lookup CITYNAME in geo_data and merge as extra columns into cv_data (i.e. COUNTRYNAME, COUNTRYCODE, LAT, LONG)
-  arrange(desc(STARTDATE)) 
-#%>% slice(1:13)
+  arrange(desc(STARTDATE))
 
 # extract date ranges for time spent in each city:
 geo_data <- geo_data %>%
@@ -203,8 +190,13 @@ get_long_lat <- function(city) {
 
 ```{r edu_plot,fig.align='center', fig.width=6.5, fig.height=2.7, fig.showtext=TRUE}
 # WORLD MAP:
-load.fontawesome()
+library(sf)
+library(rworldmap)
+library(stplanr)
+library(fontawesome)
+library(emojifont)
 
+load.fontawesome()
 world <- getMap(resolution = "high")
 world <- world %>% st_as_sf()
 cities <- st_sfc(
@@ -299,9 +291,7 @@ knitr::raw_latex(
 
 # libraries
 library(packcircles)
-library(ggplot2)
 library(viridis)
-library(dplyr)
 
 skills_data <- read.csv("skills_data.csv")
 skill_names <- skills_data %>% pull(name)
@@ -324,12 +314,21 @@ dat1.gg <- circleLayoutVertices(packing, npoints=50)
 dat1.gg <- dat1.gg %>% mutate(colour = skill_colours[id])
 dat1.gg <- dat1.gg %>% mutate(colour = colour)
 
+skills_circlepack <- ggplot() +
+  geom_polygon(data = dat1.gg, aes(x, y, group = id, fill = colour), colour = "black", alpha = 0.6) +
+  scale_fill_viridis() +
+  geom_text(data = data1, aes(x, y, size=1, label = group), color="black") +
+  scale_size_continuous(range = c(3,3)) +
+  theme_void() +
+  theme(legend.position="none") +
+  coord_equal()
+
 # WORDCLOUD
 
 library(wordcloud)
 library(tm)
 library(gridGraphics)
-library(gridExtra)
+#library(gridExtra)
 library(cowplot)
 
 interest_category_colours = c("firebrick2", "blue4", "darkgreen", "darkorange3", "cornflowerblue")
@@ -350,18 +349,9 @@ interests_sizes <- interests_data %>% pull(size)
 par(mfrow=c(1,2), mar=c(0, 5, 0, 0))
 
 set.seed(22)
-wordcloud(interests_words, interests_sizes, min.freq=1, random.order = FALSE, max.words = Inf, scale=c(1.5,0.2), colors = interests_colours, ordered.colors = TRUE, rot.per=.15)
+interests_cloud <- wordcloud(interests_words, interests_sizes, min.freq=1, random.order = FALSE, max.words = Inf, scale=c(1.5,0.2), colors = interests_colours, ordered.colors = TRUE, rot.per=.15)
 
-plot2 <- ggplot() +
-  geom_polygon(data = dat1.gg, aes(x, y, group = id, fill = colour), colour = "black", alpha = 0.6) +
-  scale_fill_viridis() +
-  geom_text(data = data1, aes(x, y, size=1, label = group), color="black") +
-  scale_size_continuous(range = c(3,3)) +
-  theme_void() +
-  theme(legend.position="none") +
-  coord_equal()
-
-grid.draw(as_grob(plot2))
+grid.draw(as_grob(skills_circlepack))
 ```
 
 \newpage

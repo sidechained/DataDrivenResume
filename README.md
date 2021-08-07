@@ -1,4 +1,8 @@
-[![CV](preview.png)](https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf)
+# Preview
+
+[![CV](DataDrivenResume-Page1.png | width=100)](https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf)
+
+[![CV](DataDrivenResume-Page2.png | width=100)](https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf)
 
 # Aim
 The basic aim of this project was to create a two-page resume with a geographical overview on the first page and selected highlights from my CV on the second, with layout/code separated from content as much as possible. The project also proved useful to learn Rmarkdown and deepen my knowledge of R and Latex.
@@ -82,10 +86,4 @@ The idea of the interests word-cloud is to display interests which move from gen
 
 # Acknowledgements
 
-The initial inspiration and template for this project comes from Lorena Abad, who developed a great looking geographical CV on which this resume is partially based (https://github.com/loreabad6/R-CV). Her work uses and modifies slightly the Awesome CV template created by Claud D. Park which I also use here (https://github.com/posquit0/Awesome-CV).
-
-Templates for the CV and a matching covering letter can also be found on Overleaf:
-https://www.overleaf.com/latex/templates/awesome-cv/dfnvtnhzhhbm
-https://www.overleaf.com/latex/templates/awesome-cv-cover-letter/hzvvsbxccjhz
-
-My CV created with the [vitae](https://github.com/mitchelloharawild/vitae) package in R.
+The initial inspiration and template for this project comes from Lorena Abad, who developed a great looking [geographical CV](https://github.com/loreabad6/R-CV) on which this resume is based. Her work uses the [vitae](https://github.com/mitchelloharawild/vitae) package in R by Mitchell O’Hara-Wild and also modifies the Awesome CV template created by Claud D. Park (https://github.com/posquit0/Awesome-CV). [Awesome CV](https://www.overleaf.com/latex/templates/awesome-cv/dfnvtnhzhhbm) and a [matching covering letter](https://www.overleaf.com/latex/templates/awesome-cv-cover-letter/hzvvsbxccjhz) can also be found on Overleaf.

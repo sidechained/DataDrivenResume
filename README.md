@@ -1,4 +1,4 @@
-TODO: Add PDF example
+[![CV](preview.png)](https://github.com/sidechained/DataDriveResume/blob/master/DataDrivenResume.pdf)
 
 # Aim
 The basic aim of this project was to create a two-page resume with a geographical overview on the first page and selected highlights from my CV on the second, with layout/code separated from content as much as possible. The project also proved useful to learn Rmarkdown and deepen my knowledge of R and Latex.
@@ -87,3 +87,5 @@ The initial inspiration and template for this project comes from Lorena Abad, wh
 Templates for the CV and a matching covering letter can also be found on Overleaf:
 https://www.overleaf.com/latex/templates/awesome-cv/dfnvtnhzhhbm
 https://www.overleaf.com/latex/templates/awesome-cv-cover-letter/hzvvsbxccjhz
+
+My CV created with the [vitae](https://github.com/mitchelloharawild/vitae) package in R.

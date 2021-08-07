@@ -5,7 +5,7 @@ position: Architect >> Inventor >> Futurist
 address: |
          | 407 S. Forest Ave., Carbondale, Illinois
 phone: +49 111 2222 3333
-email: "buckminster.fuller  @geodesic-mail.com"
+email: "buckminster.fuller@geodesic-mail.com"
 twitter: bucky1895
 github: bucky1895
 # reinclude other options here
@@ -14,7 +14,7 @@ aboutme: "When I am working on a problem, I never think about beauty but when I 
 dateofbirth: 12/07/1895
 headcolor: 009ACD
 date: "`r format(Sys.time(), '%B %Y')`"
-docname: "Curriculum Vitae"
+docname: "Resume"
 #docname: "Lebenslauf"
 output: 
   vitae::awesomecv:
@@ -332,24 +332,25 @@ library(gridGraphics)
 library(gridExtra)
 library(cowplot)
 
-interests_data <- read.csv("interests_data.csv") %>% mutate(subcats = strsplit(subcats, ";")) %>% mutate(deepdives = strsplit(deepdives, ";")) %>% mutate(cats = as.factor(cats))
-catcols <- c("firebrick2", "blue4", "darkgreen", "darkorange3", "cornflowerblue")
-allcols <- c(catcols, subcatcols, deepdivecols)
-i2 <- interests_data %>% mutate(subcat_colours = )
+interest_category_colours = c("firebrick2", "blue4", "darkgreen", "darkorange3", "cornflowerblue")
+interests_data <- read.csv("interests_data.csv") %>% 
+  mutate(category = as.factor(category)) %>% 
+  mutate(colour = interest_category_colours[as.integer(category)]) %>%
+  mutate(size = case_when(
+      type == 'main' ~ 5,
+      type == 'sub' ~ 2,
+      type == 'subsub' ~ 1
+    )
+  )
 
-words = c(interests_data$cats, interests_data$subcats, interests_data$deepdives)
-words
-
-freqs = c(
-  seq(from = 5, to = 5, length.out = length(cats)),
-  seq(from = 2, to = 2, length.out = length(subcats)),
-  seq(from = 1, to = 1, length.out = length(deepdives))
-)
+interests_words <- interests_data %>% pull(text)
+interests_colours <- interests_data %>% pull(colour)
+interests_sizes <- interests_data %>% pull(size)
 
 par(mfrow=c(1,2), mar=c(0, 5, 0, 0))
 
 set.seed(22)
-wordcloud(words, freqs, min.freq=1, random.order = FALSE, max.words = Inf, scale=c(1.5,0.2), colors = allcols, ordered.colors = TRUE, rot.per=.15)
+wordcloud(interests_words, interests_sizes, min.freq=1, random.order = FALSE, max.words = Inf, scale=c(1.5,0.2), colors = interests_colours, ordered.colors = TRUE, rot.per=.15)
 
 plot2 <- ggplot() +
   geom_polygon(data = dat1.gg, aes(x, y, group = id, fill = colour), colour = "black", alpha = 0.6) +

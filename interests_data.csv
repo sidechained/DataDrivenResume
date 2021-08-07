@@ -1,6 +1,56 @@
-cats,subcats,deepdives
-music,concerts;modular synthesis;drumming;creativity,MIDI sequencers;mutable instruments;hardware samplers;tiny concert venues;sound installations;ebay kleinanzeigen;
-travel,home exchange;visiting new countries;train travel;camping,sleeping on trains;trans-siberian railway;qinghai;israel & palastine;japan;south-east asia;
-cooking,sichaunese food;reducing food waste;wok cooking;fermentation,hand-pulled noodles;kibbe & manakish;chilli bean paste;preserving lemons;sesame oil;twice-cooked pork;
-cycling,with family;with cargobikes;with folding bikes;instead of driving,hitch-biking;cycle-camping;on berliner mauerweg;on elbe radweg;in northern japan;along taiwanese coast;
-podcasts,comedy;discussion;long-form;statistics,not so standard deviations;sinica;broken record;what had happened was;making sense;why we bleep
+category,type,text
+construction,main,construction
+travel,main,travel
+architecture,main,architecture
+theories,main,theories
+reading,main,reading
+construction,sub,geodesic domes
+construction,sub,social housing
+construction,sub,tensile structures
+construction,sub,apartments
+travel,sub,conferences
+travel,sub,visiting new countries
+travel,sub,hot weather
+travel,sub,megacities
+architecture,sub,classical
+architecture,sub,neoclassical
+architecture,sub,modern
+architecture,sub,unusual structures
+theories,sub,socialism
+theories,sub,futurism
+theories,sub,economics
+theories,sub,emergence
+reading,sub,fiction
+reading,sub,non-fiction
+reading,sub,journals
+reading,sub,books
+construction,subsub,building outdoors
+construction,subsub,wood frames
+construction,subsub,tensor frames
+construction,subsub,making dome panels
+construction,subsub,insulation
+construction,subsub,heat-retention
+travel,subsub,spain
+travel,subsub,mexico
+travel,subsub,california
+travel,subsub,arizona
+travel,subsub,texas
+travel,subsub,france
+architecture,subsub,dome of the rock
+architecture,subsub,taj mahal
+architecture,subsub,saint basil’s cathedral
+architecture,subsub,seagaia ocean dome
+architecture,subsub,round valley ensphere
+architecture,subsub,jeddah super dome
+theories,subsub,panel structures
+theories,subsub,tensor theory
+theories,subsub,market theory
+theories,subsub,game theory
+theories,subsub,euclidean geometry
+theories,subsub,pythagorean theorem
+reading,subsub,a brief history of domes
+reading,subsub,architectural journals
+reading,subsub,futuristic novels
+reading,subsub,academic papers
+reading,subsub,digests
+reading,subsub,newspapers

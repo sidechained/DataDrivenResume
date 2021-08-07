@@ -1,6 +1,6 @@
 # Preview
 
-<img src="https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume-Page1.png" width=50% height=50%>
+<img src="https://github.com/sidechained/DataDrivenResume/blob/main/DataDrivenResume-Page1.png" width=50% height=50%>
 
 
 

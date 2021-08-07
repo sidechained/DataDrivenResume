@@ -1,6 +1,6 @@
 # Preview
 
-[![CV](DataDrivenResume-Page1.png | width = 100)](https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf)
+[![CV](<img src="https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume-Page1.png" width=50% height=50%>)](https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf)
 
 # Aim
 The basic aim of this project was to create a two-page resume with a geographical overview on the first page and selected highlights from my CV on the second, with layout/code separated from content as much as possible. The project also proved useful to learn Rmarkdown and deepen my knowledge of R and Latex.

@@ -286,49 +286,42 @@ knitr::raw_latex(
 )
 ```
 
-```{r, fig.width = 15, fig.height = 2.6, fig.align='center', echo=FALSE}
-# CIRCLE PACKING
-
-# libraries
+```{r}
 library(packcircles)
-library(viridis)
 
-skills_data <- read.csv("skills_data.csv")
-skill_names <- skills_data %>% pull(name)
-skill_categories <- skills_data %>% pull(category) %>% as.factor
-skill_sizes <- skills_data %>% pull(size) %>% as.numeric
-skill_colours <- as.integer(skill_categories)
+set.seed(22)
+data <- read.csv("skills_data.csv") %>%
+  mutate(category = as.factor(category)) %>%
+  mutate(size = ifelse(size == 1, 1.3, size)) # increase size of small bubble
 
-# increase size of small bubble
-skill_sizes <- sapply(skill_sizes, function(x) { if (x == 1)  {1.3} else {x} } )
+colours <- c("#B0E2FF", "#EEE8CD", "#A2CD5A", "#CAE1FF", "#EED5B7")
+# lightskyblue1, cornsilk2, darkolivegreen3, lightsteelblue1, bisque2
+# see https://r-charts.com/colors/ 
 
-data1 <- data.frame(group=skill_names,value=skill_sizes,colour=skill_colours)
-
-# Generate the layout
-packing <- circleProgressiveLayout(data1$value, sizetype='area')
+# Generate the layout. sizetype can be area or radius, following your preference on what to be proportional to value.
+packing <- circleProgressiveLayout(data$size, sizetype='area')
 packing$radius <- 0.95*packing$radius
-data1 <- cbind(data1, packing)
-dat1.gg <- circleLayoutVertices(packing, npoints=50)
+data <- cbind(data, packing)
+dat.gg <- circleLayoutVertices(packing, npoints=50)
+dat.gg <- dat.gg %>% mutate(category = data$category[id])
 
-# and colour to dat1.gg based on id
-dat1.gg <- dat1.gg %>% mutate(colour = skill_colours[id])
-dat1.gg <- dat1.gg %>% mutate(colour = colour)
-
-skills_circlepack <- ggplot() +
-  geom_polygon(data = dat1.gg, aes(x, y, group = id, fill = colour), colour = "black", alpha = 0.6) +
-  scale_fill_viridis() +
-  geom_text(data = data1, aes(x, y, size=1, label = group), color="black") +
-  scale_size_continuous(range = c(3,3)) +
-  theme_void() +
-  theme(legend.position="none") +
+# Basic color customization
+skills_circlepack <- ggplot() + 
+  geom_polygon(data = dat.gg, aes(x, y, group=id, fill=category), colour = "black", alpha = 0.6) +
+  scale_fill_manual(values = colours[1:length(levels(data$category))]) +
+  geom_text(data = data, aes(x, y, size=1, label=name)) +
+  scale_size_continuous(range = c(1,4)) +
+  theme_void() + 
+  guides(size="none") + 
+  theme(legend.position="bottom") +
+  theme(legend.title=element_blank()) + 
   coord_equal()
+```
 
-# WORDCLOUD
-
+```{r, fig.width = 15, fig.height = 2.6, fig.align='center', echo=FALSE}
 library(wordcloud)
 library(tm)
 library(gridGraphics)
-#library(gridExtra)
 library(cowplot)
 
 interest_category_colours = c("firebrick2", "blue4", "darkgreen", "darkorange3", "cornflowerblue")

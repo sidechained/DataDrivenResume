@@ -1,8 +1,8 @@
 # Preview
 
 <p float="left">
-  <img src="/previews/DataDrivenResume-Page2.png">
-  <img src="/previews/DataDrivenResume-Page2.png">
+  <a href="https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf"><img src="/previews/DataDrivenResume-Page1.png"></a>
+  <a href="https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf"><img src="/previews/DataDrivenResume-Page2.png"></a>
 </p>
 
 # Aim

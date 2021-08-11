@@ -1,15 +1,15 @@
-#Preview
+# Preview
 <p float="left">
   <a href="https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf"><img src="/previews/DataDrivenResume-Page1.png"></a>
   <a href="https://github.com/sidechained/DataDrivenResume/blob/master/DataDrivenResume.pdf"><img src="/previews/DataDrivenResume-Page2.png"></a>
 </p>
 
-#Introduction
+# Introduction
 The aim of this project was to create a 'data-driven' resume. In this case, data-driven simply means to separate code from content as much as possible, so that the data can easily be maintained or - in the case of this template - swapped out for your own.
 
 The resume itself consists of two pages, with a geographical overview on the first page and selected career highlights on the second.
 
-##Overview Page
+## Overview Page
 This page includes:
 
 - a header of biographical information alongside a simple written introduction
@@ -18,7 +18,7 @@ This page includes:
 - an _interests_ section which uses a word-cloud to display categories of interest organised by colour, with deeper interests shown as smaller text
 - a _skills_ section which uses a circular packing diagram to place skills into categories and to compare experience by circle size
 
-##Career Highlights Page(s)
+## Career Highlights Page(s)
 The idea here was to forgo the traditional idea of separating the CV into sections such as Experience, Education etc and instead have all elements run-together reverse-chronologically but tagged with icons/labels.
 
 The Career Highlights page(s) include:
@@ -28,7 +28,7 @@ The Career Highlights page(s) include:
   - 'short' consists of title, category and date range and description (i.e. bullet points)
   - 'detailed' adds an institution and a location
 
-#Editing the Template
+# Editing the Template
 The resume template contains uses data taken from the life of [Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller). To modify the template, simply edit:
 
 1. the four comma-separated values files in the /data folder
@@ -50,7 +50,7 @@ R does the heavy lifting when it comes to pulling the resume data from .csv file
 
 The .csv files (contained in the /data folder) are described as follows:
 
-##geo_data.csv
+## geo_data.csv
 
 - CITYNAME      - i.e. Hanoi
 - COUNTRYNAME   - i.e. Vietnam
@@ -68,7 +68,7 @@ R package: library(fontawesome)
 
 ? where does library(emojifont) fit in?
 
-##resume_data.csv
+## resume_data.csv
 
 - CATEGORY      - EDUCATION, EXPERIENCE, EXTRACURRICULAR, SKILL, PUBLICATION
 - TITLE         - "Chief Executive Officer" or "Master's Degree in Architecture"
@@ -78,7 +78,7 @@ R package: library(fontawesome)
 - CITYNAME      - NOTE: This should match with CITYNAMEs in geo_data.csv
 - DESCRIPTION   - bullet-point summary descriptions, with each point separated by a semicolon i.e. "built huge geodesic domes; lectured in Raleigh in 1949". Note there is no semicolon at the end.
 
-##interests_data.csv
+## interests_data.csv
 
 The idea of the interests word-cloud is to display interests which move from generic one-word categories through to longer examples. To do this data is organised into 'categories', 'subcategories' and 'deepdives'. 'Categories' are shown in large text, each in a different colour. 'Subcategories' of interests appear in smaller text, in colours that correspond to the initial categories. 'Deepdives' do the same again but smaller still. Typically there are 4 'subcats' and 6 'deepdives' for each 'category'. An example for one category would be:
 

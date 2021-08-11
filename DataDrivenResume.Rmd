@@ -199,12 +199,11 @@ library(emojifont)
 load.fontawesome()
 world <- getMap(resolution = "high")
 world <- world %>% st_as_sf()
+longlats <- lapply(geo_data$CITYNAME, get_long_lat)
+stpoints <- lapply(longlats, st_point)
 cities <- st_sfc(
   # CHALLENGE: do this programatically by just getting column sorted by date:
-  st_point(get_long_lat('Leicester')),
-  st_point(get_long_lat('Edinburgh')),
-  st_point(get_long_lat('Hanoi')),
-  st_point(get_long_lat('Brno'))
+  stpoints
 ) %>%
   st_sf(name = geo_data %>% unite(CITY_COUNTRYCODE, CITYNAME, COUNTRYCODE, sep = ", ") %>% pull(CITY_COUNTRYCODE)) %>%
   st_set_crs(4326) %>%
@@ -258,13 +257,13 @@ knitr::raw_latex(
     "\\begin{geoentries}\n\n",
     paste0(
       "\\georow{",
-      geo_data %>% filter(CITYNAME == 'Leicester') %>% pull(LATEX), "}", "{",
-      geo_data %>% filter(CITYNAME == 'Edinburgh') %>% pull(LATEX), "}\n\n"
+      geo_data %>% filter(CITYNAME == CITYNAME[1]) %>% pull(LATEX), "}", "{",
+      geo_data %>% filter(CITYNAME == CITYNAME[2]) %>% pull(LATEX), "}\n\n"
     ),
     paste0(
       "\\georow{",
-      geo_data %>% filter(CITYNAME == 'Hanoi') %>% pull(LATEX), "}", "{",
-      geo_data %>% filter(CITYNAME == 'Brno') %>% pull(LATEX), "}\n\n"
+      geo_data %>% filter(CITYNAME == CITYNAME[3]) %>% pull(LATEX), "}", "{",
+      geo_data %>% filter(CITYNAME == CITYNAME[4]) %>% pull(LATEX), "}\n\n"
     ),
     "\\end{geoentries}\n\n"
   )

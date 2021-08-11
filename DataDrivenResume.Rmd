@@ -200,10 +200,8 @@ load.fontawesome()
 world <- getMap(resolution = "high")
 world <- world %>% st_as_sf()
 longlats <- lapply(geo_data$CITYNAME, get_long_lat)
-stpoints <- lapply(longlats, st_point)
 cities <- st_sfc(
-  # CHALLENGE: do this programatically by just getting column sorted by date:
-  stpoints
+  lapply(longlats, st_point)
 ) %>%
   st_sf(name = geo_data %>% unite(CITY_COUNTRYCODE, CITYNAME, COUNTRYCODE, sep = ", ") %>% pull(CITY_COUNTRYCODE)) %>%
   st_set_crs(4326) %>%

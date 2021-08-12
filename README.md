@@ -54,53 +54,45 @@ The following describes the column names contained in the four .csv files in the
 
 ## cv_data.csv
 
-- CATEGORY: Must be one of the following five types: EXPERIENCE, EDUCATION, EXTRACURRICULAR, SKILL, PUBLICATION.
+- CATEGORY: Must match one of the following five types: EXPERIENCE, EDUCATION, EXTRACURRICULAR, SKILL, PUBLICATION.
 - TITLE: Title of job/course/etc i.e. for EXPERIENCE "Master Dome Builder", for EDUCATION "PhD in Geodesic Domes".
 - INSTITUTION: place worked or studied at e.g. "Geodesics Inc.", "North Carolina State University"
-- STARTDATE: in format 1/3/2001
+- STARTDATE: in format DD/MM/YYYY (single digit dates/months also acceptable)
 - ENDDATE: as above
-- CITYNAME: city where the entry took place (must match the geo_data.csv)
+- CITYNAME: city where the entry took place. This must match the CITYNAME in geo_data.csv - see [below](#geo_data.csv)
 - DESCRIPTION: Bullet-point description of experience. Each bullet-point is separated by a semicolon i.e. "erected a geodesic dome building that could sustain its own weight with no practical limits;suspended several students from the structure's framework". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## geo_data.csv
 
-CITYNAME      - i.e. Hanoi
-COUNTRYNAME   - i.e. Vietnam
-COUNTRYCODE   - i.e. VT
-LAT           - Lattitude i.e. 21.0278
-LONG          - Longitude i.e. 105.8342
-ICONNAME      - Name used by the R [fontawesome package](https://cran.r-project.org/web/packages/fontawesome/index.html) i.e. fa-map-pin
-LATEXICONNAME - Name used by the LaTex [fontawesome5 package](http://www.ipgp.fr/~moguilny/LaTex/fontawesome5Icons.pdf) i.e. faMapPin
-DESC          - Bullet-point summary of what happened in the given location. Each bullet-point is separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
-
-## resume_data.csv
-
-- CATEGORY      - EDUCATION, EXPERIENCE, EXTRACURRICULAR, SKILL, PUBLICATION
-- TITLE         - "Chief Executive Officer" or "Master's Degree in Architecture"
-- INSTITUTION   - "Black Mountain College" or "Geodesics Inc."
-- STARTDATE     - DD/MM/YYYY
-- ENDDATE       - DD/MM/YYYY
-- CITYNAME      - NOTE: This should match with CITYNAMEs in geo_data.csv
-- DESCRIPTION   - bullet-point summary descriptions, with each point separated by a semicolon i.e. "built huge geodesic domes; lectured in Raleigh in 1949". Note there is no semicolon at the end.
+- CITYNAME: i.e. Hanoi
+- COUNTRYNAME: i.e. Vietnam
+- COUNTRYCODE: i.e. VT
+- LAT: Lattitude i.e. 21.0278
+- LONG: Longitude i.e. 105.8342
+- ICONNAME: Name used by the R [fontawesome package](https://cran.r-project.org/web/packages/fontawesome/index.html) i.e. fa-map-pin
+- LATEXICONNAME: Name used by the LaTex [fontawesome5 package](http://www.ipgp.fr/~moguilny/LaTex/fontawesome5Icons.pdf) i.e. faMapPin
+- DESC: Bullet-point summary of what happened in the given location. Each bullet-point is separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## interests_data.csv
 
-The idea of the interests word-cloud is to display interests which move from generic one-word categories through to specific examples.
+The idea of the _interests_ word-cloud is to display interests which move from generic one-word categories through to specific examples.
 
 To do this data is organised into 'categories', 'subcategories' and 'sub-subcategories'. 'Categories' are shown in large text, each in a different colour. 'Subcategories' of interests appear in smaller text, in colours that correspond to the initial categories. 'Sub-subcategories' do the same again but smaller still. Typically there are 4 'subcategories' and 6 'sub-subcategories' for each 'category'. An example for one category would be:
 
-CATEGORY Typically a single word i.e. "Domes"
-TYPE main = the category itself, sub = , and subsub =
-TEXT
-main e.g. music, travel
-sub e.g. Geodesic, Monolithic
-subsub e.g. "Dome Of The Rock, Jerusalem", "Taj Mahal, Agra"
+- CATEGORY: Typically a single word i.e. "domes"
+- TYPE: Either _main_, _sub_ or _subsub_
+- TEXT: The text that will appear in the wordcloud e.g.
+  - "domes", "travel" for _main_
+  - "Geodesic" or "Monolithic" for the _sub_ "domes"
+  - "Dome Of The Rock, Jerusalem" or "Taj Mahal, Agra" for _subsub_
 
 ## skills_data.csv
 
-NAME The name of the particular skill i.e. Python
-CATEGORY The category i.e. Programming Languages
-SIZE The relative size of the bubble that will be plotted, where 1 is the smallest bubble and 3 the largest
+Skill names are grouped into categories, with size showing relative levels of experience.
+
+- NAME: The name of the particular skill i.e. Python
+- CATEGORY: The category i.e. Programming Languages
+- SIZE: The relative size of the bubble that will be plotted, where 1 is the smallest bubble and 3 the largest
 
 # Acknowledgements
 

@@ -12,27 +12,25 @@ The resume itself consists of two pages, with a geographical overview on the fir
 ## Overview Page
 This page includes:
 
-- a header of biographical information alongside a simple written introduction
-- a _map section_ entitled 'My Journey' which displays four geographically locations (thanks to Lorena Abad - see [Acknowledgements](#acknowledgements))
+- a _header of biographical information_. This can be modified to be as simple or as detailed as required, with options for a profile picture, 'about me' section, links to social media accounts etc.
+- a _map section_ which displays icons for four geographical locations (made by Lorena Abad - see [Acknowledgements](#acknowledgements))
 - a _written summary_ giving an overview of what was achieved in each location
-- an _interests_ section which uses a word-cloud to display categories of interest organised by colour, with deeper interests shown as smaller text
-- a _skills_ section which uses a circular packing diagram to place skills into categories and to compare experience by circle size
+- an _interests_ section which uses a [word-cloud](https://www.r-graph-gallery.com/wordcloud.html) to display categories of interest organised by colour (with deeper interests shown as smaller text in the same colour)
+- a _skills_ section which uses a [circular-packing diagram](https://www.r-graph-gallery.com/circle-packing.html) to place skills into categories, with circle size showing relative levels of experience
 
 ## Career Highlights Page(s)
-The idea here was to forgo the traditional idea of separating the CV into sections such as Experience, Education etc and instead have all elements run-together reverse-chronologically but tagged with icons/labels.
+The idea of this page was to forgo the traditional idea of separating the CV into sections (such as Experience, Education etc) and instead have all elements run-together reverse-chronologically but tagged with icons/labels.
 
-The Career Highlights page(s) include:
-
-- a timeline-style summary of the candidates working/employment/life history
-- two-types of entries: either 'short' or 'detailed', where:
-  - 'short' consists of title, category and date range and description (i.e. bullet points)
-  - 'detailed' adds an institution and a location
+This page includes:
+- a _timeline-style summary_ of the candidate's history, consisting of two-types of entries: either 'short' or 'detailed', where:
+  - _short entries_ consist of a title, category, date range and bullet points description
+  - _detailed entries_ add an institution and a location
 
 # Editing the Template
-The resume template contains uses data taken from the life of [Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller). To modify the template, simply edit:
+The resume template contains uses data taken from the life of [Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller). To modify it, simply edit:
 
 1. the four comma-separated values files in the /data folder
-2. the header section in the DataDrivenResume.Rmd file
+2. the header section in the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file
 
 The main code for the resume is
 

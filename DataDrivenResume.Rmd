@@ -287,27 +287,26 @@ knitr::raw_latex(
 library(packcircles)
 
 set.seed(22)
-data <- read.csv("data/skills_data.csv") %>%
-  mutate(category = as.factor(category)) %>%
-  mutate(size = ifelse(size == 1, 1.3, size)) # increase size of small bubble
+skills_data <- read.csv("data/skills_data.csv") %>%
+  mutate(CATEGORY = as.factor(CATEGORY)) %>%
+  mutate(SIZE = ifelse(SIZE == 1, 1.3, SIZE)) # increase size of small bubble
 
 colours <- c("#B0E2FF", "#EEE8CD", "#A2CD5A", "#CAE1FF", "#EED5B7")
 # lightskyblue1, cornsilk2, darkolivegreen3, lightsteelblue1, bisque2
 # see https://r-charts.com/colors/ 
 
 # Generate the layout. sizetype can be area or radius, following your preference on what to be proportional to value.
-packing <- circleProgressiveLayout(data$size, sizetype='area')
+packing <- circleProgressiveLayout(skills_data$SIZE, sizetype='area')
 packing$radius <- 0.95*packing$radius
-data <- cbind(data, packing)
-dat.gg <- circleLayoutVertices(packing, npoints=50)
-dat.gg <- dat.gg %>% mutate(category = data$category[id])
+skills_data <- cbind(skills_data, packing)
+dat.gg <- circleLayoutVertices(packing, npoints=50) %>% mutate(CATEGORY = skills_data$CATEGORY[id])
 
 # Basic color customization
 skills_circlepack <- ggplot() + 
-  geom_polygon(data = dat.gg, aes(x, y, group=id, fill=category), colour = "black", alpha = 0.6) +
-  scale_fill_manual(values = colours[1:length(levels(data$category))]) +
-  geom_text(data = data, aes(x, y, size=1, label=name)) +
-  scale_size_continuous(range = c(1,4)) +
+  geom_polygon(data = dat.gg, aes(x, y, group=id, fill=CATEGORY), colour = "black", alpha = 0.6) +
+  scale_fill_manual(values = colours[1:length(levels(skills_data$CATEGORY))]) +
+  geom_text(data = skills_data, aes(x, y, size=1, label=NAME)) +
+  scale_size_continuous(range = c(1,3.4)) +
   theme_void() + 
   guides(size="none") + 
   theme(legend.position="bottom") +
@@ -323,25 +322,21 @@ library(cowplot)
 
 interest_category_colours = c("firebrick2", "blue4", "darkgreen", "darkorange3", "cornflowerblue")
 interests_data <- read.csv("data/interests_data.csv") %>% 
-  mutate(category = as.factor(category)) %>% 
-  mutate(colour = interest_category_colours[as.integer(category)]) %>%
-  mutate(size = case_when(
-      type == 'main' ~ 5,
-      type == 'sub' ~ 2,
-      type == 'subsub' ~ 1
+  mutate(CATEGORY = as.factor(CATEGORY)) %>% 
+  mutate(COLOUR = interest_category_colours[as.integer(CATEGORY)]) %>%
+  mutate(SIZE = case_when(
+      TYPE == 'main' ~ 5,
+      TYPE == 'sub' ~ 2,
+      TYPE == 'subsub' ~ 1
     )
   )
-
-interests_words <- interests_data %>% pull(text)
-interests_colours <- interests_data %>% pull(colour)
-interests_sizes <- interests_data %>% pull(size)
 
 # plot interests_cloud and skills_circlepack side-by-side
 
 par(mfrow=c(1,2), mar=c(0, 5, 0, 0))
 
 set.seed(22)
-interests_cloud <- wordcloud(interests_words, interests_sizes, min.freq=1, random.order = FALSE, max.words = Inf, scale=c(1.5,0.2), colors = interests_colours, ordered.colors = TRUE, rot.per=.15)
+interests_cloud <- wordcloud(pull(interests_data, TEXT), pull(interests_data, SIZE), min.freq=1, random.order = FALSE, max.words = Inf, scale=c(1.5,0.2), colors = pull(interests_data, COLOUR), ordered.colors = TRUE, rot.per=.15)
 
 grid.draw(as_grob(skills_circlepack))
 ```

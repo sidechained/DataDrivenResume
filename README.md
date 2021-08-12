@@ -74,7 +74,7 @@ The following describes the column names contained in the four .csv files in the
 ## interests_data.csv
 The idea of the _interests_ word-cloud is to display interests which move from generic one-word categories through to specific examples.
 
-To do this data is organised into 'categories', 'subcategories' and 'sub-subcategories'. 'Categories' are shown in large text, each in a different colour. 'Subcategories' of interests appear in smaller text, in colours that correspond to the initial categories. 'Sub-subcategories' do the same again but smaller still. Typically there are 4 'subcategories' and 6 'sub-subcategories' for each 'category'. An example for one category would be:
+To do this data is organised into _categories_, _subcategories_ and _sub-subcategories_. _Categories_ are shown in large text, each in a different colour. _Subcategories_ of interests appear in smaller text, in colours that correspond to the initial categories. _Sub-subcategories_ do the same again but smaller still. Typically there are 4 _subcategories_ and 6 _sub-subcategories_ for each _category_. An example for one category would be:
 
 - CATEGORY: Typically a single word i.e. "domes"
 - TYPE: Either _main_, _sub_ or _subsub_

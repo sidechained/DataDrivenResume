@@ -53,7 +53,6 @@ To see the final LaTex code that R generates, change the `keep_tex: false` to `t
 The following describes the column names contained in the four .csv files in the `/data` folder. This should help when replacing the data with your own. The files are best viewed in Excel, Google Sheets or their open-source equivalents.
 
 ## cv_data.csv
-
 - CATEGORY: Must match one of the following five types: EXPERIENCE, EDUCATION, EXTRACURRICULAR, SKILL, PUBLICATION.
 - TITLE: Title of job/course/etc i.e. for EXPERIENCE "Master Dome Builder", for EDUCATION "PhD in Geodesic Domes".
 - INSTITUTION: place worked or studied at e.g. "Geodesics Inc.", "North Carolina State University"
@@ -63,7 +62,6 @@ The following describes the column names contained in the four .csv files in the
 - DESCRIPTION: Bullet-point description of experience. Each bullet-point is separated by a semicolon i.e. "erected a geodesic dome building that could sustain its own weight with no practical limits;suspended several students from the structure's framework". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## geo_data.csv
-
 - CITYNAME: i.e. Hanoi
 - COUNTRYNAME: i.e. Vietnam
 - COUNTRYCODE: i.e. VT
@@ -74,7 +72,6 @@ The following describes the column names contained in the four .csv files in the
 - DESC: Bullet-point summary of what happened in the given location. Each bullet-point is separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## interests_data.csv
-
 The idea of the _interests_ word-cloud is to display interests which move from generic one-word categories through to specific examples.
 
 To do this data is organised into 'categories', 'subcategories' and 'sub-subcategories'. 'Categories' are shown in large text, each in a different colour. 'Subcategories' of interests appear in smaller text, in colours that correspond to the initial categories. 'Sub-subcategories' do the same again but smaller still. Typically there are 4 'subcategories' and 6 'sub-subcategories' for each 'category'. An example for one category would be:
@@ -87,7 +84,6 @@ To do this data is organised into 'categories', 'subcategories' and 'sub-subcate
   - "Dome Of The Rock, Jerusalem" or "Taj Mahal, Agra" for _subsub_
 
 ## skills_data.csv
-
 Skill names are grouped into categories, with size showing relative levels of experience.
 
 - NAME: The name of the particular skill i.e. Python

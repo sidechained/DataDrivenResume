@@ -5,7 +5,7 @@
 </p>
 
 # Introduction
-The aim of this project was to create a 'data-driven' resume. In this case, data-driven simply means to separate code from content as much as possible, so that the data can easily be maintained or - in the case of this template - swapped out for your own.
+The aim of this project was to create a 'data-driven' resume. In this case, data-driven simply means to separate code from content as much as possible, so that the content can easily be maintained or - in the case of this template - swapped out for your own.
 
 The resume itself consists of two pages, with a geographical overview on the first page and selected career highlights on the second.
 
@@ -13,9 +13,9 @@ The resume itself consists of two pages, with a geographical overview on the fir
 This page includes:
 
 - a _header of biographical information_. This can be modified to be as simple or as detailed as required, with options for a profile picture, 'about me' section, links to social media accounts etc.
-- a _map section_ which displays icons for four geographical locations (made by Lorena Abad - see [Acknowledgements](#acknowledgements))
+- a _map section_ which displays icons for four geographical locations (created by Lorena Abad - see [Acknowledgements](#acknowledgements))
 - a _written summary_ giving an overview of what was achieved in each location
-- an _interests_ section which uses a [word-cloud](https://www.r-graph-gallery.com/wordcloud.html) to display categories of interest organised by colour (with deeper interests shown as smaller text in the same colour)
+- an _interests_ section which uses a [word-cloud](https://www.r-graph-gallery.com/wordcloud.html) to display categories-of-interest organised by colour (with deeper interests shown as smaller text in the same colour)
 - a _skills_ section which uses a [circular-packing diagram](https://www.r-graph-gallery.com/circle-packing.html) to place skills into categories, with circle size showing relative levels of experience
 
 ## Career Highlights Page(s)
@@ -24,47 +24,54 @@ The idea of this page was to forgo the traditional idea of separating the CV int
 This page includes:
 - a _timeline-style summary_ of the candidate's history, consisting of two-types of entries: either 'short' or 'detailed', where:
   - _short entries_ consist of a title, category, date range and bullet points description
-  - _detailed entries_ add an institution and a location
+  - _detailed entries_ consist of the above plus an institution and a location
 
 # Editing the Template
 The resume template contains uses data taken from the life of [Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller). To modify it, simply edit:
 
-1. the four comma-separated values files in the /data folder
-2. the header section in the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file
+1. The four comma-separated values files in the [`/data`](/data) folder
+2. The header section in the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file
 
-The main code for the resume is
-
-RMarkdown document - which in this case uses the Vitae package to knit together R and Latex code to produce a PDF. To knit the document yourself you will first need to install [RStudio](https://www.rstudio.com). I'm running RStudio on MacOS, but the process should be similar regardless of operating system, as follows:
+To knit the document yourself you will first need to install [RStudio](https://www.rstudio.com). I'm running RStudio on MacOS, but the process should be similar regardless of operating system, as follows:
 
 1. Clone this repo using `git clone https://github.com/sidechained/DataDrivenResume.git`
 2. Cpen the DataDrivenResume.Rmd file in RStudio
+<!--- 3. Install dependencies in R --->
 3. Ensure the working directory is set to the directory where you cloned the repo. Use the command `getwd()` to check and `setwd()` to
 4. From the File menu in RStudio choose "Knit Document". Knitting will begin and after some time a PDF file will be output with the same name as the .Rmd file i.e. DataDrivenResume.pdf
 
 # Under the Hood
-R does the heavy lifting when it comes to pulling the resume data from .csv files and sorting it chronologically, creating date range etc. R is also used to create custom figures as seen in the Interests and Skills sections. Latex on the other hand is used to format the final document in a clear, structured and visually-appealing way. Much of the R code programatically generates Latex.
+The main code for generating the resume is contained within the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file. This uses R's Vitae package to knit together R and LaTex code, with the final output being a PDF.
 
-# Description of comma-separated values files
+R does the heavy lifting when it comes to pulling the resume data from .csv files and sorting it chronologically, automatically creating date ranges etc. Much of this R code programatically generates LaTex. R is also used to create custom figures as seen in the _Interests_ and _Skills_ sections.
 
-The .csv files (contained in the /data folder) are described as follows:
+LaTex itself is used to format the final document in a clear, structured and visually-appealing way. The final layout is based on a given LaTex class file (in this case [awesome-cv.cls](awesome-cv.cls) - see [Acknowledgements](#acknowledgements)).
+
+To see the final LaTex code that R generates, change the `keep_tex: false` to `true` in the YAML header of [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd), then watch for a `DataDrivenResume.tex` file being created when knitting the document.
+
+# Code Book: Description of comma-separated values files
+The following describes the column names contained in the four .csv files in the `/data` folder. This should help when replacing the data with your own. The files are best viewed in Excel, Google Sheets or their open-source equivalents.
+
+## cv_data.csv
+
+- CATEGORY: Must be one of the following five types: EXPERIENCE, EDUCATION, EXTRACURRICULAR, SKILL, PUBLICATION.
+- TITLE: Title of job/course/etc i.e. for EXPERIENCE "Master Dome Builder", for EDUCATION "PhD in Geodesic Domes".
+- INSTITUTION: place worked or studied at e.g. "Geodesics Inc.", "North Carolina State University"
+- STARTDATE: in format 1/3/2001
+- ENDDATE: as above
+- CITYNAME: city where the entry took place (must match the geo_data.csv)
+- DESCRIPTION: Bullet-point description of experience. Each bullet-point is separated by a semicolon i.e. "erected a geodesic dome building that could sustain its own weight with no practical limits;suspended several students from the structure's framework". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## geo_data.csv
 
-- CITYNAME      - i.e. Hanoi
-- COUNTRYNAME   - i.e. Vietnam
-- COUNTRYCODE   - i.e. VT
-- LAT           - Lattitude i.e. 21.0278
-- LONG          - Longitude i.e. 105.8342
-- ICONNAME      - i.e. fa-map-pin
-- LATEXICONNAME - i.e. faMapPin
-- DESC          - bullet-point summary descriptions, with each point separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end.
-
-uses font awesome icons within both R and Latex.
-
-Latex package:  fontawesome5 http://www.ipgp.fr/~moguilny/LaTeX/fontawesome5Icons.pdf
-R package: library(fontawesome)
-
-? where does library(emojifont) fit in?
+CITYNAME      - i.e. Hanoi
+COUNTRYNAME   - i.e. Vietnam
+COUNTRYCODE   - i.e. VT
+LAT           - Lattitude i.e. 21.0278
+LONG          - Longitude i.e. 105.8342
+ICONNAME      - Name used by the R [fontawesome package](https://cran.r-project.org/web/packages/fontawesome/index.html) i.e. fa-map-pin
+LATEXICONNAME - Name used by the LaTex [fontawesome5 package](http://www.ipgp.fr/~moguilny/LaTex/fontawesome5Icons.pdf) i.e. faMapPin
+DESC          - Bullet-point summary of what happened in the given location. Each bullet-point is separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## resume_data.csv
 
@@ -78,18 +85,23 @@ R package: library(fontawesome)
 
 ## interests_data.csv
 
-The idea of the interests word-cloud is to display interests which move from generic one-word categories through to longer examples. To do this data is organised into 'categories', 'subcategories' and 'deepdives'. 'Categories' are shown in large text, each in a different colour. 'Subcategories' of interests appear in smaller text, in colours that correspond to the initial categories. 'Deepdives' do the same again but smaller still. Typically there are 4 'subcats' and 6 'deepdives' for each 'category'. An example for one category would be:
+The idea of the interests word-cloud is to display interests which move from generic one-word categories through to specific examples.
 
-- CATS          - "Domes"
-- SUBCATS       - "Geodesic;Monolithic;Crossed-arch;Rotational"
-- DEEPDIVES     - "Dome Of The Rock, Jerusalem; Taj Mahal, Agra;Saint Basil’s Cathedral, Moscow;Seagaia Ocean Dome, Miyazaki; Round Valley Ensphere, Arizona; Jeddah Super Dome, Saudi Arabia"
+To do this data is organised into 'categories', 'subcategories' and 'sub-subcategories'. 'Categories' are shown in large text, each in a different colour. 'Subcategories' of interests appear in smaller text, in colours that correspond to the initial categories. 'Sub-subcategories' do the same again but smaller still. Typically there are 4 'subcategories' and 6 'sub-subcategories' for each 'category'. An example for one category would be:
+
+CATEGORY Typically a single word i.e. "Domes"
+TYPE main = the category itself, sub = , and subsub =
+TEXT
+main e.g. music, travel
+sub e.g. Geodesic, Monolithic
+subsub e.g. "Dome Of The Rock, Jerusalem", "Taj Mahal, Agra"
 
 ## skills_data.csv
 
-- name          -
-- category      -
-- size          -
+NAME The name of the particular skill i.e. Python
+CATEGORY The category i.e. Programming Languages
+SIZE The relative size of the bubble that will be plotted, where 1 is the smallest bubble and 3 the largest
 
 # Acknowledgements
 
-The initial inspiration and template for this project comes from Lorena Abad, who developed a great looking [geographical CV](https://github.com/loreabad6/R-CV) which this resume template builds on. Her work uses the [vitae](https://github.com/mitchelloharawild/vitae) package in R by Mitchell O’Hara-Wild and also modifies the Awesome CV template created by Claud D. Park (https://github.com/posquit0/Awesome-CV). [Awesome CV](https://www.overleaf.com/latex/templates/awesome-cv/dfnvtnhzhhbm) and a [matching covering letter](https://www.overleaf.com/latex/templates/awesome-cv-cover-letter/hzvvsbxccjhz) can also be found on Overleaf.
+The initial inspiration and template for this project comes from Lorena Abad, who developed a great looking [geographical CV](https://github.com/loreabad6/R-CV) which this resume template builds on. Her work uses the [vitae](https://github.com/mitchelloharawild/vitae) package in R by Mitchell O’Hara-Wild and also modifies the Awesome CV template created by Claud D. Park (https://github.com/posquit0/Awesome-CV). [Awesome CV](https://www.overleaf.com/LaTex/templates/awesome-cv/dfnvtnhzhhbm) and a [matching covering letter](https://www.overleaf.com/LaTex/templates/awesome-cv-cover-letter/hzvvsbxccjhz) can also be found on Overleaf.

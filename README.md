@@ -96,4 +96,8 @@ Skill names are grouped into categories, with size showing relative levels of ex
 
 # Acknowledgements
 
-The initial inspiration and template for this project comes from Lorena Abad, who developed a great looking [geographical CV](https://github.com/loreabad6/R-CV) which this resume template builds on. Her work uses the [vitae](https://github.com/mitchelloharawild/vitae) package in R by Mitchell O’Hara-Wild and also modifies the Awesome CV template created by Claud D. Park (https://github.com/posquit0/Awesome-CV). [Awesome CV](https://www.overleaf.com/LaTex/templates/awesome-cv/dfnvtnhzhhbm) and a [matching covering letter](https://www.overleaf.com/LaTex/templates/awesome-cv-cover-letter/hzvvsbxccjhz) can also be found on Overleaf.
+The initial inspiration and template for this project comes from Lorena Abad, who developed a great looking [geographical CV](https://github.com/loreabad6/R-CV) which this resume template builds on.
+
+Her work uses the [vitae](https://github.com/mitchelloharawild/vitae) package in R by Mitchell O’Hara-Wild and also modifies the [Awesome CV template](https://github.com/posquit0/Awesome-CV) created by Claud D. Park .
+
+[Awesome CV](https://www.overleaf.com/LaTex/templates/awesome-cv/dfnvtnhzhhbm) and a [matching covering letter](https://www.overleaf.com/LaTex/templates/awesome-cv-cover-letter/hzvvsbxccjhz) can also be found on Overleaf.

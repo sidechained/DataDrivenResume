@@ -79,9 +79,9 @@ To do this data is organised into _categories_, _subcategories_ and _sub-subcate
 - CATEGORY: Typically a single word i.e. "domes"
 - TYPE: Either _main_, _sub_ or _subsub_
 - TEXT: The text that will appear in the wordcloud e.g.
-  - "domes", "travel" for _main_
-  - "Geodesic" or "Monolithic" for the _sub_ "domes"
-  - "Dome Of The Rock, Jerusalem" or "Taj Mahal, Agra" for _subsub_
+  - "domes" for _main_
+  - "Geodesic" for _sub_
+  - "Dome Of The Rock, Jerusalem" for _subsub_
 
 ## skills_data.csv
 Skill names are grouped into categories, with size showing relative levels of experience.

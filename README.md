@@ -49,9 +49,7 @@ LaTex itself is used to format the final document in a clear, structured and vis
 
 To see the final LaTex code that R generates, change the `keep_tex: false` to `true` in the YAML header of [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd), then watch for a `DataDrivenResume.tex` file being created when knitting the document.
 
-Blah Blah
-
-# Description of comma-separated values files (codebook)
+# Description of comma-separated values files
 The following describes the column names contained in the four .csv files in the `/data` folder. This should help when replacing the data with your own. The files are best viewed in Excel, Google Sheets or their open-source equivalents.
 
 ## cv_data.csv

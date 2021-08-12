@@ -35,10 +35,10 @@ The resume template contains uses data taken from the life of [Buckminster Fulle
 To knit the document yourself you will first need to install [RStudio](https://www.rstudio.com). I'm running RStudio on MacOS, but the process should be similar regardless of operating system, as follows:
 
 1. Clone this repo using `git clone https://github.com/sidechained/DataDrivenResume.git`
-2. Cpen the DataDrivenResume.Rmd file in RStudio
-<!--- 3. Install dependencies in R --->
-3. Ensure the working directory is set to the directory where you cloned the repo. Use the command `getwd()` to check and `setwd()` to
-4. From the File menu in RStudio choose "Knit Document". Knitting will begin and after some time a PDF file will be output with the same name as the .Rmd file i.e. DataDrivenResume.pdf
+2. Cpen the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file in RStudio
+3. Install package dependencies in R by uncommenting and running the [following lines](DataDrivenResume.Rmd#L34-47) in `DataDrivenResume.Rmd`
+4. Ensure the working directory is set to the directory where you cloned the repo. Use the command `getwd()` to check and `setwd()` to link to the correct path if it is incorrect
+5. From the File menu in RStudio choose "Knit Document". Knitting will begin and after some time a PDF file will be output with the same name as the .Rmd file i.e. DataDrivenResume.pdf
 
 # Under the Hood
 The main code for generating the resume is contained within the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file. This uses R's Vitae package to knit together R and LaTex code, with the final output being a PDF.

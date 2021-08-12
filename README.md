@@ -37,8 +37,8 @@ To knit the document yourself you will first need to install [RStudio](https://w
 1. Clone this repo using `git clone https://github.com/sidechained/DataDrivenResume.git`
 2. Cpen the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file in RStudio
 3. Install package dependencies in R by uncommenting and running the [following lines](DataDrivenResume.Rmd#L34-47) in `DataDrivenResume.Rmd`
-4. Ensure the working directory is set to the directory where you cloned the repo. Use the command `getwd()` to check and `setwd()` to link to the correct path if it is incorrect
-5. From the File menu in RStudio choose "Knit Document". Knitting will begin and after some time a PDF file will be output with the same name as the .Rmd file i.e. DataDrivenResume.pdf
+4. Ensure the working directory is set to the directory where you cloned the repo. Use the command `getwd()` to check and `setwd()` to provide the correct path if it is incorrect
+5. From the File menu in RStudio choose "Knit Document". Knitting will begin and after some time a PDF file will be output with the same name as the .Rmd file (i.e. `DataDrivenResume.pdf`). Note this will overwrite the existing template PDF.
 
 # Under the Hood
 The main code for generating the resume is contained within the [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd) file. This uses R's Vitae package to knit together R and LaTex code, with the final output being a PDF.
@@ -49,7 +49,7 @@ LaTex itself is used to format the final document in a clear, structured and vis
 
 To see the final LaTex code that R generates, change the `keep_tex: false` to `true` in the YAML header of [`DataDrivenResume.Rmd`](DataDrivenResume.Rmd), then watch for a `DataDrivenResume.tex` file being created when knitting the document.
 
-# Code Book: Description of comma-separated values files
+# Description of comma-separated values files (codebook)
 The following describes the column names contained in the four .csv files in the `/data` folder. This should help when replacing the data with your own. The files are best viewed in Excel, Google Sheets or their open-source equivalents.
 
 ## cv_data.csv

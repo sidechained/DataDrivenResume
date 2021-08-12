@@ -62,13 +62,13 @@ The following describes the column names contained in the four .csv files in the
 - DESCRIPTION: Bullet-point description of experience. Each bullet-point is separated by a semicolon i.e. "erected a geodesic dome building that could sustain its own weight with no practical limits;suspended several students from the structure's framework". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## geo_data.csv
-- CITYNAME: i.e. Hanoi
-- COUNTRYNAME: i.e. Vietnam
-- COUNTRYCODE: i.e. VT
-- LAT: Lattitude i.e. 21.0278
-- LONG: Longitude i.e. 105.8342
-- ICONNAME: Name used by the R [fontawesome package](https://cran.r-project.org/web/packages/fontawesome/index.html) i.e. fa-map-pin
-- LATEXICONNAME: Name used by the LaTex [fontawesome5 package](http://www.ipgp.fr/~moguilny/LaTex/fontawesome5Icons.pdf) i.e. faMapPin
+- CITYNAME: e.g. Hanoi
+- COUNTRYNAME: e.g. Vietnam
+- COUNTRYCODE: e.g. VT
+- LAT: Lattitude e.g. 21.0278
+- LONG: Longitude e.g. 105.8342
+- ICONNAME: Name used by the R [fontawesome package](https://cran.r-project.org/web/packages/fontawesome/index.html) e.g. fa-map-pin
+- LATEXICONNAME: Name used by the LaTex [fontawesome5 package](https://ctan.org/pkg/fontawesome5?lang=en) e.g. faMapPin
 - DESC: Bullet-point summary of what happened in the given location. Each bullet-point is separated by a semicolon i.e. "married Anne Hewlett;developed the Stockade Building System". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## interests_data.csv

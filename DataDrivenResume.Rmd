@@ -197,7 +197,7 @@ library(fontawesome)
 library(emojifont)
 
 load.fontawesome()
-world <- getMap(resolution = "high")
+world <- getMap(resolution = "low")
 world <- world %>% st_as_sf()
 longlats <- lapply(geo_data$CITYNAME, get_long_lat)
 cities <- st_sfc(

@@ -52,7 +52,7 @@ To see the final LaTex code that R generates, change the `keep_tex: false` to `t
 # Description of comma-separated values files (codebook)
 The following describes the column names contained in the four .csv files in the `/data` folder. This should help when replacing the data with your own. The files are best viewed in Excel, Google Sheets or their open-source equivalents.
 
-## cv_data.csv
+## cv_data.csv
 - CATEGORY: Must match one of the following five types: EXPERIENCE, EDUCATION, EXTRACURRICULAR, SKILL, PUBLICATION.
 - TITLE: Title of job/course/etc i.e. for EXPERIENCE "Master Dome Builder", for EDUCATION "PhD in Geodesic Domes".
 - INSTITUTION: place worked or studied at e.g. "Geodesics Inc.", "North Carolina State University"

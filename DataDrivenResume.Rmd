@@ -4,7 +4,6 @@ surname: Fuller
 position: Architect >> Inventor >> Futurist
 address: 407 S. Forest Ave., Carbondale, Illinois
 #profilepic: bucky.jpg
-dateofbirth: 12/07/1895
 phone: +49 111 2222 3333
 email: "buckminster.fuller@geodesic-mail.com"
 homepage: "www.bucky1985.com"

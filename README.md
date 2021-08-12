@@ -58,7 +58,7 @@ The following describes the column names contained in the four .csv files in the
 - INSTITUTION: Place worked or studied at e.g. "Geodesics Inc.", "North Carolina State University"
 - STARTDATE: In format DD/MM/YYYY (single digit dates/months also acceptable)
 - ENDDATE: As above
-- CITYNAME: City where the entry took place. This must match the CITYNAME in geo_data.csv - see [below](##geo_data.csv)
+- CITYNAME: City where the entry took place. This must match the CITYNAME in [`geo_data.csv`](/data/geo_data.csv)
 - DESCRIPTION: Bullet-point description of experience. Each bullet-point is separated by a semicolon i.e. "erected a geodesic dome building that could sustain its own weight with no practical limits;suspended several students from the structure's framework". Note there is no semicolon at the end. Items may be separated by carriage returns for ease of reading.
 
 ## geo_data.csv
